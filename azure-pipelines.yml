@@ -10,10 +10,10 @@ pool:
   vmImage: ubuntu-latest
 
 parameters:
-  - name: ImageRepoServiceConnection
-    type: string
-    default: kg-dockerhub
-    displayName: DockerHub Service Connection
+  # - name: ImageRepoServiceConnection
+  #   type: string
+  #   default: kg-dockerhub
+  #   displayName: DockerHub Service Connection
 
   - name: TF_VERSION
     type: string
@@ -22,7 +22,7 @@ parameters:
 
   - name: repository
     type: string
-    default: kgopi1/azselfhostedagent
+    default: jolerasioo/ado-selfhosted-aci
     displayName: ContainerRepository
 
 stages:
@@ -35,21 +35,20 @@ stages:
           - task: Docker@2
             displayName: DockerBuild
             inputs:
-              containerRegistry: ${{ parameters.ImageRepoServiceConnection }}
-              command: "build"
-              Dockerfile: "**/Dockerfile"
-              repository: ${{ parameters.repository }}
-              arguments: --build-arg TF_VERSION=${{ parameters.TF_VERSION  }}
+              containerRegistry: 'selfhostedagent20221103'
+              repository: '${{ parameters.repository }}'
+              command: 'build'
+              Dockerfile: '**/Dockerfile'
               tags: |
                 $(Build.BuildId)
                 latest
+              arguments: '--build-arg TF_VERSION=${{ parameters.TF_VERSION  }}'
           - task: Docker@2
             displayName: DockerPush
             inputs:
-              containerRegistry: ${{ parameters.ImageRepoServiceConnection }}
-              command: "push"
-              Dockerfile: "**/Dockerfile"
-              repository: ${{ parameters.repository }}
+              containerRegistry: 'selfhostedagent20221103'
+              repository: '${{ parameters.repository }}'
+              command: 'push'
               tags: |
                 $(Build.BuildId)
                 latest
