@@ -22,7 +22,7 @@ parameters:
 
   - name: repository
     type: string
-    default: kgopi1/azselfhostedagent
+    default: jolerasioo/ado-selfhosted-aci
     displayName: ContainerRepository
 
 stages:
