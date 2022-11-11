@@ -12,8 +12,8 @@ pool:
 parameters:
   - name: ImageRepoServiceConnection
     type: string
-    default: kg-dockerhub
-    displayName: DockerHub Service Connection
+    default: acrmytest2adoagent.azurecr.io
+    displayName: ACR
 
   - name: TF_VERSION
     type: string
